@@ -85,7 +85,7 @@ def AlcoholAnalysis(a):
     plt.legend(loc = "upper left")
     plt.ylabel("Number of Accidents")
     plt.xlabel("Month")
-    plt.title("Influnce of Alcohol to Accident Severity")
+    plt.title("Influence of Alcohol on Accident Severity")
 
     plt.show()
       
@@ -111,6 +111,38 @@ def HourlyWithinDates(a,b):
     plt.ylabel("Number of Accidents")
     plt.xlabel("Time of Day (Hourly)")
     plt.title("Hourly Accident Frequency")
+
+    plt.show()
+      
+    wb.close()
+
+def PassengersAnalysis(a):
+    ctrList = [0,0,0,0,0,0,0]
+    injList = [0,0,0,0,0,0,0]
+    labels = [0,1,2,3,4,5,"6+"]
+
+    for row in sheet.rows:
+        if type(row[4].value) == str:
+            continue
+        if row[4].value.year == int(a):
+            index = row[49].value
+            if index > 6:
+                index = 6
+            if row[27].value > 0 or row[28].value > 0:
+                injList[index] += 1
+                print("Inj Added: " + str(labels[index]))
+            else:
+                ctrList[index] += 1
+                print("Ctr Added: " + str(labels[index]))
+
+
+    plt.plot(labels, ctrList, label = "Non-Injury")
+    plt.plot(labels, injList, label = "Serious Injury/Fatality")
+
+    plt.legend(loc = "upper left")
+    plt.ylabel("Number of Accidents")
+    plt.xlabel("Number of Passengers")
+    plt.title("Influence of Passengers on Accident Severity")
 
     plt.show()
       

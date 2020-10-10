@@ -8,7 +8,7 @@ class myGUI(wx.Frame):
         self.initialise()
 
     def initialise(self):
-        self.SetSize(wx.Size(900,350))
+        self.SetSize(wx.Size(900,500))
         pnl = wx.Panel(self)
         #UI for Function 1
         lbl1A = wx.StaticText(pnl,label="Find accident information within given dates.", pos=(25,25))
@@ -52,25 +52,35 @@ class myGUI(wx.Frame):
         #Logic for Function 4
         btn4.Bind(wx.EVT_BUTTON, self.AlcoholSearch)
         ##UI for Function 5
-        btn5 = wx.Button(pnl, pos = (755,450), label = "???")
+        lbl5A = wx.StaticText(pnl,label="Discover how passengers influence accident severity for given year.", pos=(525,325))
+        lbl5B = wx.StaticText(pnl,label="Year must be formatted as YYYY.", pos=(525,350))
+        lbl5C = wx.StaticText(pnl,label="Year:", pos=(540,380))
+        self.input5 = wx.TextCtrl(pnl, value = "", pos = (580, 375))
+        btn5 = wx.Button(pnl, pos = (740,400), label = "Impact of Passengers")
+        #Logic for Function 5
+        btn5.Bind(wx.EVT_BUTTON, self.PassengerSearch)
         
         self.Show()
 
     def DateSearch(self, event):
-        wx.MessageBox("Processing now, please allow up to couple minutes to complete, depending on CPU performance.")
+        wx.MessageBox("Notice: Please allow up to a couple minutes to complete, depending on CPU performance. Click okay to continue.")
         FindWithinDates(self.input1A.GetValue(), self.input1B.GetValue())
 
     def HourSearch(self, event):
-        wx.MessageBox("Processing now, please allow up to couple minutes to complete, depending on CPU performance.")
+        wx.MessageBox("Notice: Please allow up to a couple minutes to complete, depending on CPU performance. Click okay to continue.")
         HourlyWithinDates(self.input2A.GetValue(), self.input2B.GetValue())
 
     def KeywordSearch(self, event):
-        wx.MessageBox("Processing now, please allow up to couple minutes to complete, depending on CPU performance.")
+        wx.MessageBox("Notice: Please allow up to a couple minutes to complete, depending on CPU performance. Click okay to continue.")
         KeywordWithinDates(self.input3A.GetValue(), self.input3B.GetValue(), self.input3C.GetValue())
 
     def AlcoholSearch(self, event):
-        wx.MessageBox("Processing now, please allow up to couple minutes to complete, depending on CPU performance.")
+        wx.MessageBox("Notice: Please allow up to a couple minutes to complete, depending on CPU performance. Click okay to continue.")
         AlcoholAnalysis(self.input4.GetValue())
+
+    def PassengerSearch(self, event):
+        wx.MessageBox("Notice: Please allow up to a couple minutes to complete, depending on CPU performance. Click okay to continue.")
+        PassengersAnalysis(self.input5.GetValue())
 
 if __name__ == "__main__":
     app = wx.App()
